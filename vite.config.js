@@ -13,11 +13,14 @@ try {
     if (!fs.existsSync(destDir)) {
       fs.mkdirSync(destDir, { recursive: true })
     }
+
     const files = fs.readdirSync(srcDir)
+
     for (const file of files) {
       if (file.endsWith('.png')) {
         const srcFile = path.join(srcDir, file)
         const destFile = path.join(destDir, file)
+
         if (!fs.existsSync(destFile)) {
           fs.copyFileSync(srcFile, destFile)
         }
@@ -34,5 +37,5 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3000,
   },
-  base: '/',
+  base: '/New_portfolio/',
 })
