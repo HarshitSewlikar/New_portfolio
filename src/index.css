@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Distance from the top of the viewport to the bottom edge of the fixed Navbar.
+     Navbar: h-[68px] + pt-3 (12px) on mobile, h-[76px] + pt-4 (16px) at >=640px.
+     Used by scroll-padding-top so section navigation lands exactly below the
+     Navbar with no leftover sliver of the previous section. */
+  :root {
+    --nav-h: 80px;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --nav-h: 92px;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+  }
+
+  body {
+    @apply bg-base-bg text-base-ink font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-extrabold tracking-tight text-base-ink;
+  }
+
+  ::selection {
+    background: rgba(255, 217, 61, 0.4);
+    color: #FFFFFF;
+  }
+
+  :focus-visible {
+    outline: 3px solid #2F6BFF;
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+}
+
+@layer utilities {
+  .overflow-x-clip {
+    overflow-x: clip;
+  }
+
+  .container-px {
+    @apply px-5 sm:px-8 lg:px-14;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold text-base-ink mb-4;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-blue-soft;
+  }
+
+  .eyebrow-dot::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-accent-yellow;
+  }
+
+  /* Blue + yellow + pink cafe gradient */
+  .gradient-text {
+    background-image: linear-gradient(
+      100deg,
+      #5C8FFF 0%,
+      #7AA0FF 35%,
+      #FFD93D 70%,
+      #FF8DAF 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft butter gradient for sub-headings */
+  .gradient-text-cream {
+    background-image: linear-gradient(100deg, #FFD93D 0%, #FFA8C2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-blue {
+    background-image: linear-gradient(100deg, #2F6BFF 0%, #7AA0FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card-surface {
+    @apply bg-base-surface border-2 border-base-border rounded-3xl;
+  }
+
+  .card-elevated {
+    @apply bg-base-elevated border-2 border-base-border rounded-3xl;
+  }
+
+  /* Pop sticker button — chunky offset shadow */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-white
+           bg-accent-blue
+           shadow-pop-blue
+           transition-all duration-200
+           hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[10px_10px_0_0_#2F6BFF]
+           active:translate-x-0 active:translate-y-0 active:shadow-pop-blue;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-white
+           bg-base-elevated border-2 border-base-border
+           shadow-pop
+           transition-all duration-200
+           hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[10px_10px_0_0_#2F6BFF] hover:border-accent-blue
+           active:translate-x-0 active:translate-y-0 active:shadow-pop;
+  }
+
+  .btn-warm {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-zinc-950
+           bg-accent-yellow
+           shadow-pop-yellow
+           transition-all duration-200
+           hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[10px_10px_0_0_#FFD93D]
+           active:translate-x-0 active:translate-y-0 active:shadow-pop-yellow;
+  }
+
+  .btn-pink {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-zinc-950
+           bg-accent-pink
+           shadow-pop-pink
+           transition-all duration-200
+           hover:-translate-y-0.5 hover:-translate-x-0.5 hover:shadow-[10px_10px_0_0_#FF8DAF]
+           active:translate-x-0 active:translate-y-0 active:shadow-pop-pink;
+  }
+
+  .chip {
+    @apply px-3 py-1 text-xs font-semibold rounded-full border-2 border-base-border
+           bg-base-surface text-base-ink-soft;
+  }
+
+  .chip-primary {
+    @apply px-3 py-1 text-xs font-bold rounded-full border-2 border-accent-blue/70
+           bg-accent-blue-tint text-accent-blue-soft;
+  }
+
+  .chip-warm {
+    @apply px-3 py-1 text-xs font-bold rounded-full border-2 border-accent-yellow/70
+           bg-accent-yellow-tint text-accent-yellow;
+  }
+
+  .chip-pink {
+    @apply px-3 py-1 text-xs font-bold rounded-full border-2 border-accent-pink/70
+           bg-accent-pink-tint text-accent-pink;
+  }
+
+  /* Hand-drawn squiggly underline */
+  .hand-underline {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 7 Q 25 1, 50 6 T 100 7 T 150 6 T 198 7' stroke='%23FFD93D' stroke-width='4' stroke-linecap='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.45em;
+    padding-bottom: 0.15em;
+  }
+
+  .hand-underline-blue {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 7 Q 25 1, 50 6 T 100 7 T 150 6 T 198 7' stroke='%232F6BFF' stroke-width='4' stroke-linecap='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.45em;
+    padding-bottom: 0.15em;
+  }
+
+  .hand-underline-pink {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 7 Q 25 1, 50 6 T 100 7 T 150 6 T 198 7' stroke='%23FF7BA0' stroke-width='4' stroke-linecap='round' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.45em;
+    padding-bottom: 0.15em;
+  }
+
+  /* Sticker wiggle on hover */
+  .sticker {
+    @apply inline-block transition-transform duration-300;
+  }
+  .sticker:hover {
+    transform: rotate(-6deg) scale(1.08);
+  }
+
+  /* Bouncy hover for cards */
+  .bouncy {
+    @apply transition-all duration-300;
+  }
+  .bouncy:hover {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+}
+
+/* Subtle grain across the page */
+.page-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Animated dashed connector */
+@keyframes dashFlow {
+  to { stroke-dashoffset: -40; }
+}
+.dash-flow {
+  stroke-dasharray: 6 8;
+  animation: dashFlow 1.6s linear infinite;
+}
+
+/* Sparkle twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(45deg); }
+}
+.twinkle {
+  animation: twinkle 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
